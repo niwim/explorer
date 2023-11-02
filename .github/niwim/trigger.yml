@@ -1,0 +1,19 @@
+name: Trigger Workflow on Release
+on:
+  release:
+    push:
+     branch: main
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Workflow
+        env:
+          TARGET_REPO: "niwim/explorer-cd"
+          EVENT_TYPE: "custom_release_event"
+        run: |
+          curl -X POST \
+            -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${{ secrets.PERSONAL_ACCESS_TOKEN }}" \
+            "https://api.github.com/repos/$TARGET_REPO/dispatches" \
+            -d "{\"event_type\": \"$EVENT_TYPE\"}"
