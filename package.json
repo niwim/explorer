@@ -200,5 +200,14 @@
     "os": false,
     "net": false,
     "tls": false
+  },
+  "pnpm": {
+    "packageExtensions": {
+      "isolated-vm": {
+        "devDependencies": {
+          "node-gyp": "*"
+        }
+      }
   }
+}
 }
